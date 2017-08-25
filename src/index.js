@@ -1,23 +1,19 @@
-import React, { Component } from 'react'
-import { Container, Tabs, Tab, Text, TabHeading } from 'native-base'
-
-import Me from './MeTab';
-import Users from './UsersTab';
-import Channels from './ChannelsTab';
+import React, { Component } from 'react';
+import { Container, Text } from 'native-base';
 
 export default class App extends Component {
+  state = {
+    c: 0
+  };
+
+  componentDidMount() {
+    window.setInterval(() => this.setState({ c: this.state.c + 1 }), 1000);
+  }
+
   render() {
     return (
         <Container>
-          <Tabs tabBarPosition="top">
-            <Tab heading={ <TabHeading><Text>Me</Text></TabHeading> }>
-              <Me />
-            </Tab>
-            
-            <Tab heading={ <TabHeading><Text>Chanels</Text></TabHeading> }>
-              <Channels />
-            </Tab>
-          </Tabs>
+          <Text>Hello Grey {this.state.c}</Text>
         </Container>
     )
   }
