@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Text } from 'native-base';
+import { Provider } from 'react-redux';
+import { Container } from 'native-base';
 
-export default class App extends Component {
-  state = {
-    c: 0
-  };
+import Counter from './components/Counter';
 
-  componentDidMount() {
-    window.setInterval(() => this.setState({ c: this.state.c + 1 }), 1000);
-  }
-
+export default class Application extends Component {
   render() {
+    const { store } = this.props;
+
     return (
+      <Provider store={store}>
         <Container>
-          <Text>Hello Grey {this.state.c}</Text>
+          <Counter />
         </Container>
-    )
+      </Provider>
+    );
   }
 }
