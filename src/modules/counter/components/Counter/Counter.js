@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text, Button, H1 } from 'native-base';
+import { View, Text, Button } from 'native-base';
 
 export default ({ count, increment }) => (
   <View>
-    <H1>
-      <Text>
-        Hello Grey {count}
-      </Text>
-    </H1>
+    <Text>
+      Hello World {count}
+    </Text>
 
     <Button onPress={increment}>
       <Text>Increment</Text>
