@@ -1,1 +1,1 @@
-export const MODULE = 'counter';
+export const NAME = 'counter';

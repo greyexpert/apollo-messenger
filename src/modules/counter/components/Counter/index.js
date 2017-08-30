@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { getCount } from '../../reducers';
-import { increment } from '../../actions';
-
+import { getCount, increment } from '../../ducks';
 import Counter from './Counter';
 
 const mapStateToProps = createStructuredSelector({

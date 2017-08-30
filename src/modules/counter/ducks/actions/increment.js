@@ -5,5 +5,5 @@ import { INCREMENT } from '../actionTypes';
 const increment = createAction(INCREMENT);
 
 export default () => dispatch => {
-  dispatch(increment(5));
+  dispatch(increment(1));
 }
