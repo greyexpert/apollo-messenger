@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Container } from 'native-base';
 
-import { Counter } from './modules/counter';
+import { LaunchScreen } from './modules/base';
 
 export default class Application extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class Application extends Component {
     return (
       <Provider store={store}>
         <Container>
-          <Counter />
+          <LaunchScreen />
         </Container>
       </Provider>
     );

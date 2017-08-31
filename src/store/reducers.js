@@ -4,7 +4,9 @@ import modules from '../modules';
 
 export default () => {
   const reducers = modules.reduce((reducers, module) => {
-    reducers[module.name] = module.reducer;
+    if (module.reducer) {
+      reducers[module.name] = module.reducer;
+    }
 
     return reducers;
   }, {});
