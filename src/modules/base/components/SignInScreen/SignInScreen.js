@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Content, Button, Text, View } from 'native-base';
 
-import { SIGN_UP_ROUTE } from '../../routes';
-
 export default class SignInScreen extends Component {
   render() {
 
-    const { navigate } = this.props.navigation;
+    const { goToSignUp, goToChannels } = this.props;
 
     return (
       <View>
@@ -15,9 +13,15 @@ export default class SignInScreen extends Component {
             Sign In
           </Text>
 
-          <Button onPress={() => navigate(SIGN_UP_ROUTE)}>
+          <Button onPress={goToSignUp}>
             <Text>
               Next
+            </Text>
+          </Button>
+
+          <Button onPress={goToChannels}>
+            <Text>
+              To Channels
             </Text>
           </Button>
         </View>

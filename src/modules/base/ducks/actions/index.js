@@ -1,3 +1,2 @@
-/**
- * Created by skambalin on 30.8.17.
- */
+export goToSignUp from './goToSignUp';
+export goToChannels from './goToChannels';

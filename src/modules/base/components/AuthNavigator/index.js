@@ -6,7 +6,7 @@ import AppNavigator from '../AppNavigator';
 
 import { SIGN_IN_ROUTE, SIGN_UP_ROUTE, APPLICATION_ROUTE } from '../../routes';
 
-export default StackNavigator({
+const AuthNavigator = StackNavigator({
   [SIGN_UP_ROUTE]: {
     screen: SignUpScreen,
   },
@@ -21,3 +21,5 @@ export default StackNavigator({
 }, {
   initialRouteName: SIGN_IN_ROUTE
 });
+
+export default AuthNavigator;

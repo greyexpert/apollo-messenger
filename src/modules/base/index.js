@@ -1,6 +1,7 @@
 import { NAME } from './constants';
 
 export {
+  AuthNavigator,
   LaunchScreen
 } from './components';
 
