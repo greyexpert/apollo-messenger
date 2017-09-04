@@ -1,11 +1,12 @@
 import { NAME } from './constants';
 
 export {
-  AuthNavigator,
-  LaunchScreen,
-  AppNavigator
-} from './components';
+  getNavigationState
+} from './ducks';
 
+/**
+ * Module descriptor
+ */
 export default {
   name: NAME
 };

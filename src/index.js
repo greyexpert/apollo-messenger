@@ -4,7 +4,7 @@ import { Container } from 'native-base';
 
 import Router from './router';
 
-export default class Application extends Component {
+export default class Root extends Component {
   render() {
     const { store } = this.props;
 
