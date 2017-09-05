@@ -1,9 +1,9 @@
-import Base from './base';
-import Counter from './counter';
-import Navigation from './navigation'
+import Application from './application';
+import Authentication from './authentication';
+import Messenger from './messenger';
 
 export default [
-  Counter,
-  Base,
-  Navigation
+  Application,
+  Authentication,
+  Messenger
 ];

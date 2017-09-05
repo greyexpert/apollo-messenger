@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StackNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
+import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 
-import Application from '../application';
+import getRoot from './root';
 
-export const LAUNCH_ROUTE = 'launch';
 export const REDUCER_NAME = 'navigation';
 
-const Navigator = StackNavigator({
-  [LAUNCH_ROUTE]: {
-    screen: Application,
-  }
-}, {
-  initialRouteName: LAUNCH_ROUTE,
-  headerMode: 'none'
-});
-
+const Navigator = getRoot();
 const initialState = Navigator.router.getStateForAction(NavigationActions.init());
 
 export const reducer = (state = initialState, action) => {

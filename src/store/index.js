@@ -1,7 +1,10 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import createRootReducer from './reducers';
+
+const compose = composeWithDevTools({ name: 'Messenger' });
 
 export default (initialState) => {
 
