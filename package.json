@@ -7,11 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "apollo-client": "^1.9.2",
     "babel-preset-react-native": "3.0.1",
     "lodash": "^4.17.4",
     "native-base": "^2.3.1",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
+    "react-apollo": "^1.4.15",
     "react-native": "0.47.2",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.6",
@@ -19,7 +21,8 @@
     "redux-actions": "^2.2.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "styled-components": "^2.1.2"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

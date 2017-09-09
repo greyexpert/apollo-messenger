@@ -18,5 +18,6 @@ export default StackNavigator({
     screen: MessengerNavigator
   }
 }, {
-  initialRouteName: LAUNCH_ROUTE
+  initialRouteName: LAUNCH_ROUTE,
+  headerMode: 'none'
 });
