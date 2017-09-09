@@ -12,4 +12,6 @@ export default StackNavigator({
   [SIGN_UP_ROUTE]: {
     screen: SignUpScreen
   }
+}, {
+
 });

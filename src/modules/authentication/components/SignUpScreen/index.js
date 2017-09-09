@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
-import SignUpScreen from './SignUpScreen';
+import { submit } from 'redux-form'
 
-import { openMessenger } from '../../../application'
+import SignInScreen from './SignUpScreen';
+import { FORM_NAME } from '../SignUpForm';
+
+import {} from '../../ducks'
 
 const mapDispatchToProps = {
-  openMessenger
+  submitForm: () => submit(FORM_NAME)
 };
 
-export default connect(null, mapDispatchToProps)(SignUpScreen);
+export default connect(null, mapDispatchToProps)(SignInScreen);

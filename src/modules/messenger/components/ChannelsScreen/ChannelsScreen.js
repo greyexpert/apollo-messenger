@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'native-base';
+import { Container, Content, Header, Body, Title, Left, Icon, Right, View, Text, Button } from 'native-base';
 
 export default class ChannelsScreen extends Component {
   render() {
     const { startAuthentication, openMessenger } = this.props;
 
     return (
-      <View>
-        <Text>ChannelsScreen</Text>
+      <Container>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+              <Icon name="menu" />
+            </Button>
+          </Left>
 
-        <Button onPress={startAuthentication}>
-          <Text>Sign out</Text>
-        </Button>
-      </View>
+          <Body>
+            <Title>Chats</Title>
+          </Body>
+
+          <Right />
+        </Header>
+        <Content>
+          <Text>ChannelsScreen</Text>
+
+          <Button onPress={startAuthentication}>
+            <Text>Sign out</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 }

@@ -1,5 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'native-base';
+import { Container, Content, View, Text, Button, H1 } from 'native-base';
+import styled from 'styled-components/native';
+
+import SignInForm from '../SignInForm';
+
+const Wraper = styled(View)`
+  
+`;
+
+const Head = styled(View)`
+  height: 255px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Form = styled(SignInForm)`
+  margin-bottom: 60px;
+  width: 280px;
+  align-self: center;
+`;
+
+const Buttons = styled(View)`
+  align-self: center;
+`;
+
+const ButtonItem = styled(Button)`
+  margin-bottom: 10px;
+  width: 180px;
+  align-self: center;
+  justify-content: center;
+`;
+
 
 export default class SignInScreen extends Component {
   static navigationOptions = {
@@ -8,15 +39,40 @@ export default class SignInScreen extends Component {
   };
 
   render() {
-    const { showSignUp } = this.props;
+    const { showSignUp, submitForm, openMessenger } = this.props;
 
     return (
-      <View>
-        <Text>SignInScreen</Text>
-        <Button onPress={showSignUp}>
-          <Text>SignUp</Text>
-        </Button>
-      </View>
+      <Container>
+        <Content>
+          <Wraper>
+            <Head>
+              <H1>
+                Please sign in
+              </H1>
+            </Head>
+
+            <Form onSubmit={(values) => {
+              console.log(values);
+
+              openMessenger();
+            }} />
+
+            <Buttons>
+              <ButtonItem onPress={submitForm}>
+                <Text>
+                  Sign in
+                </Text>
+              </ButtonItem>
+
+              <ButtonItem bordered onPress={showSignUp}>
+                <Text>
+                  Sign up
+                </Text>
+              </ButtonItem>
+            </Buttons>
+          </Wraper>
+        </Content>
+      </Container>
     );
   }
 }
