@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Content, View, Text, Button, H1 } from 'native-base';
+import {
+  Text,
+  Container,
+  View,
+  Body,
+  Content,
+  Header,
+  Left,
+  Right,
+  Icon,
+  Title,
+  Button,
+  H1
+} from "native-base";
+
 import styled from 'styled-components/native';
 
 import SignUpForm from '../SignUpForm';
@@ -32,9 +46,29 @@ const ButtonItem = styled(Button)`
 `;
 
 
-export default class SignInScreen extends Component {
+class ScreenHeader extends Component {
+  render() {
+    const { navigation } = this.props;
+
+    return (
+      <Header>
+        <Left>
+          <Button transparent onPress={() => navigation.goBack(null)}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+        <Title>Sign up</Title>
+        </Body>
+        <Right />
+      </Header>
+    );
+  }
+}
+
+export default class SignUpScreen extends Component {
   static navigationOptions = {
-    title: 'Sign Up',
+    header: props => <ScreenHeader {...props} />
   };
 
   render() {
