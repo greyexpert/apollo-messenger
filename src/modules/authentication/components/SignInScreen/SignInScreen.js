@@ -39,7 +39,7 @@ export default class SignInScreen extends Component {
   };
 
   render() {
-    const { showSignUp, submitForm, openMessenger } = this.props;
+    const { showSignUp, submitForm, attemptLogin, isSubmitting } = this.props;
 
     return (
       <Container>
@@ -51,14 +51,10 @@ export default class SignInScreen extends Component {
               </H1>
             </Head>
 
-            <Form onSubmit={(values) => {
-              console.log(values);
-
-              openMessenger();
-            }} />
+            <Form onSubmit={attemptLogin} />
 
             <Buttons>
-              <ButtonItem onPress={submitForm}>
+              <ButtonItem onPress={submitForm} disabled={isSubmitting}>
                 <Text>
                   Sign in
                 </Text>
