@@ -16,7 +16,7 @@ export default class LaunchScreen extends Component {
       <Container>
         <Wrap>
           <View>
-            <Button onPress={startAuthentication}>
+            <Button onPress={openMessenger}>
               <Text>Launch App</Text>
             </Button>
           </View>

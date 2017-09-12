@@ -8,7 +8,7 @@ import SignInScreen from './SignInScreen';
 import { FORM_NAME } from '../SignInForm';
 
 import { showSignUp } from '../../ducks'
-import { openMessenger } from '../../../application'
+import { openMessenger } from '../../../application/ducks'
 
 const signInMutation = gql`
 mutation signIn($email: String!, $password: String!) {

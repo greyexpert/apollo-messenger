@@ -24,10 +24,6 @@ export default class ChannelsScreen extends Component {
         </Header>
         <Content>
           <Text>ChannelsScreen</Text>
-
-          <Button onPress={startAuthentication}>
-            <Text>Sign out</Text>
-          </Button>
         </Content>
       </Container>
     );

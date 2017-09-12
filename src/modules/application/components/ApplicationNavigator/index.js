@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation';
 
 import { AUTHENTICATION_ROUTE, MESSENGER_ROUTE, LAUNCH_ROUTE } from '../../constants';
-import { AuthenticationNavigator } from '../../../authentication';
-import { MessengerNavigator } from '../../../messenger';
+import { AuthenticationNavigator } from '../../../authentication/components';
+import { MessengerNavigator } from '../../../messenger/components';
 import LaunchScreen from '../LaunchScreen';
 
 export default StackNavigator({
