@@ -3,7 +3,7 @@ import { Container, Content, Header, Body, Title, Left, Icon, Right, View, Text,
 
 export default class ChannelsScreen extends Component {
   render() {
-    const { startAuthentication, openMessenger } = this.props;
+    const { navigation, showUsers  } = this.props;
 
     return (
       <Container>
@@ -11,7 +11,7 @@ export default class ChannelsScreen extends Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+              onPress={() => navigation.navigate("DrawerOpen")}>
               <Icon name="menu" />
             </Button>
           </Left>
@@ -20,7 +20,13 @@ export default class ChannelsScreen extends Component {
             <Title>Chats</Title>
           </Body>
 
-          <Right />
+          <Right>
+            <Button
+              transparent
+              onPress={showUsers}>
+              <Icon name="add" />
+            </Button>
+          </Right>
         </Header>
         <Content>
           <Text>ChannelsScreen</Text>

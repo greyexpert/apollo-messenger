@@ -1,5 +1,7 @@
 import { NAME } from './constants';
+import reducer from './ducks';
 
 export default {
-  name: NAME
+  name: NAME,
+  reducer
 };
