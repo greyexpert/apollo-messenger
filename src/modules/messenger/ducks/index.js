@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import { property } from 'lodash';
 import { createAction, handleAction } from 'redux-actions';
 import { NAME } from '../constants';
 
+/**
+ * Selectors
+ */
 export const getUserSearchPhrase = state => state[NAME].users.search;
+
 export const SEARCH_USERS = 'messenger/searchUsers';
 export const searchUsers = createAction(SEARCH_USERS);
 

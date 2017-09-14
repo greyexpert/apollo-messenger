@@ -74,17 +74,15 @@ export default class UsersScreen extends Component {
               <List>
                 {
                   allUsers.map(user => (
-                    <ListItem avatar key={user.id}>
+                    <ListItem avatar button key={user.id} onPress={() => console.log(user.id)}>
                       <Left>
                         <Thumbnail source={defaultAvatar} />
                       </Left>
+
                       <Body>
-                      <Text>{user.name}</Text>
-                      <Text note>{user.email}</Text>
+                        <Text>{user.name}</Text>
+                        <Text note>{user.email}</Text>
                       </Body>
-                      <Right>
-                        <Text note>3:43 pm</Text>
-                      </Right>
                     </ListItem>
                   ))
                 }

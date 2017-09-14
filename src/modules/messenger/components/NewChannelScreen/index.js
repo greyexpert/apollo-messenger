@@ -2,7 +2,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { graphql, gql } from 'react-apollo';
 
-import UsersScreen from './UsersScreen';
+import NewChannelScreen from './NewChannelScreen';
 import { searchUsers, getUserSearchPhrase } from '../../ducks';
 
 const usersQuery = gql`
@@ -20,20 +20,20 @@ query Users($keyword: String!){
 }
 `;
 
-const UsersScreenWithData = graphql(usersQuery, {
+const NewChannelScreenWithData = graphql(usersQuery, {
   options: props => ({
     variables: {
       keyword: props.searchPhrase
     }
   })
-})(UsersScreen);
+})(NewChannelScreen);
 
 const mapStateToProps = createStructuredSelector({
   searchPhrase: getUserSearchPhrase
 });
 
 const mapDispatchToProps = {
-  searchUsers
+  searchUsers,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersScreenWithData);
+export default connect(mapStateToProps, mapDispatchToProps)(NewChannelScreenWithData);

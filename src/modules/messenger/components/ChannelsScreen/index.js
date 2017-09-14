@@ -2,14 +2,16 @@ import { connect } from 'react-redux';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
 import ChannelsScreen from './ChannelsScreen';
-import UsersScreen from '../UsersScreen';
+import NewChannelScreen from '../NewChannelScreen';
+import ChannelScreen from '../ChannelScreen';
 
-const USERS_ROUTE = 'messenger/users';
+const NEW_CHANNEL_ROUTE = 'messenger/channels/new';
 const CHANNELS_ROUTE = 'messenger/channels/index';
+const CHANNEL_ROUTE = 'messenger/channels/view';
 
 const mapDispatchToProps = {
-  showUsers: () => NavigationActions.navigate({
-    routeName: USERS_ROUTE
+  showChannelCreation: () => NavigationActions.navigate({
+    routeName: NEW_CHANNEL_ROUTE
   })
 };
 
@@ -22,8 +24,13 @@ export default StackNavigator({
       header: null
     }
   },
-  [USERS_ROUTE]: {
-    screen: UsersScreen
+
+  [NEW_CHANNEL_ROUTE]: {
+    screen: NewChannelScreen
+  },
+
+  [CHANNEL_ROUTE]: {
+    screen: ChannelScreen
   }
 }, {
   initialRouteName: CHANNELS_ROUTE

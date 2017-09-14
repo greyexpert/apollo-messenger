@@ -3,7 +3,7 @@ import { Container, Content, Header, Body, Title, Left, Icon, Right, View, Text,
 
 export default class ChannelsScreen extends Component {
   render() {
-    const { navigation, showUsers  } = this.props;
+    const { navigation, showChannelCreation  } = this.props;
 
     return (
       <Container>
@@ -23,13 +23,13 @@ export default class ChannelsScreen extends Component {
           <Right>
             <Button
               transparent
-              onPress={showUsers}>
+              onPress={showChannelCreation}>
               <Icon name="add" />
             </Button>
           </Right>
         </Header>
         <Content>
-          <Text>ChannelsScreen</Text>
+          <Text>Channels Screen</Text>
         </Content>
       </Container>
     );

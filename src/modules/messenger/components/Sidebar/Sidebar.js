@@ -1,7 +1,18 @@
 import React from "react";
 import { Image } from "react-native";
 import styled from 'styled-components/native';
-import { Container, Content, Text, View, Button, List, ListItem } from "native-base";
+import {
+  Container,
+  Content,
+  Text,
+  View,
+  Button,
+  List,
+  ListItem,
+  Icon,
+  Body,
+  Left
+} from "native-base";
 
 import avatarImage from './avatar.jpg';
 
@@ -20,8 +31,8 @@ const Wrapper = styled(View)`
 
 const Head = styled(View)`
   align-items: center;
-  margin: 10px;
   flex: 2;
+  padding: 10px;
 `;
 
 const Middle = styled(View)`
@@ -31,7 +42,7 @@ const Middle = styled(View)`
 const Bottom = styled(View)`
   flex: 1;
   justify-content: center;
-  margin: 0px 20px;
+  padding: 0px 20px;
 `;
 
 export default class Sidebar extends React.Component {
@@ -47,6 +58,16 @@ export default class Sidebar extends React.Component {
           </Head>
 
           <Middle>
+            <List>
+              <ListItem icon last>
+                <Left>
+                  <Icon name="chatboxes" />
+                </Left>
+                <Body>
+                  <Text>Channels</Text>
+                </Body>
+              </ListItem>
+            </List>
 
           </Middle>
           <Bottom>
