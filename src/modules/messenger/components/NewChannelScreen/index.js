@@ -15,7 +15,6 @@ query Users($keyword: String!){
     id,
     name,
     email,
-    password
   }
 }
 `;
@@ -65,7 +64,10 @@ export default compose(
             variables: {
               ownerId,
               recipientIds
-            }
+            },
+            refetchQueries: [
+              'userChannels'
+            ]
           });
 
           goToChannel(id);

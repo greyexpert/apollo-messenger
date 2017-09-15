@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { gql, graphql, compose } from 'react-apollo';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
 import ChannelsScreen from './ChannelsScreen';
@@ -9,13 +10,64 @@ const NEW_CHANNEL_ROUTE = 'messenger/channels/new';
 const CHANNELS_ROUTE = 'messenger/channels/index';
 const CHANNEL_ROUTE = 'messenger/channels/view';
 
+
+const channelsQuery = gql`
+query userChannels($userId: ID!){
+  allChannels(
+    orderBy: updatedAt_DESC
+    filter: {
+      OR: [
+      	{
+          owner: {
+      			id: $userId
+      		}
+        },
+        {
+          recipients_some: {
+            id: $userId
+          }
+        }
+      ]
+    }
+  ) {
+    id,
+    recipients {
+      name
+    }
+    messages(last: 1) {
+      text,
+      createdAt
+      user {
+        id
+        name
+      }
+    }
+  }
+}
+`;
+
 const mapDispatchToProps = {
   showChannelCreation: () => NavigationActions.navigate({
     routeName: NEW_CHANNEL_ROUTE
+  }),
+  openChannel: (id) => NavigationActions.navigate({
+    routeName: CHANNEL_ROUTE,
+    params: {
+      channelId: id
+    }
   })
 };
 
-const ConnectedChannelsScreen = connect(null, mapDispatchToProps)(ChannelsScreen);
+const ConnectedChannelsScreen = compose(
+  connect(null, mapDispatchToProps),
+  graphql(channelsQuery, {
+    options: {
+      variables: {
+        userId: 'cj6jd7fk2kver0124unux3co3'
+      }
+    }
+  })
+)(ChannelsScreen);
 
 export default StackNavigator({
   [CHANNELS_ROUTE]: {
