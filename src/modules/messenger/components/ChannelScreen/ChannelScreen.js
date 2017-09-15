@@ -4,25 +4,54 @@ import {
   Container,
   Content,
   Text,
-  Spinner
+  Spinner,
+  Header,
+  Button,
+  Left,
+  Icon,
+  Body,
+  Right,
+  Title
 } from 'native-base';
 
 export default class ChannelScreen extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   render() {
     const {
       loading,
-      channel
+      channel,
+      navigation
     } = this.props;
 
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => navigation.goBack(null)}>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+
+          <Body>
+            <Title>
+              {
+                channel && channel.recipients.map(({ name }) => name).join(', ')
+              }
+            </Title>
+          </Body>
+
+          <Right/>
+        </Header>
         <Content>
           {
-            loading ? (
+            loading && (
               <Spinner color='blue' />
-            ) : channel.recipients.map(({ name }) => (
-                <Text>{name}</Text>
-            ))
+            )
           }
         </Content>
       </Container>

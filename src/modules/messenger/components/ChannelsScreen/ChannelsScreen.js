@@ -23,7 +23,7 @@ export default class ChannelsScreen extends Component {
           <Right>
             <Button
               transparent
-              onPress={showChannelCreation}>
+              onPress={() => showChannelCreation()}>
               <Icon name="add" />
             </Button>
           </Right>

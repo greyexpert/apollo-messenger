@@ -75,7 +75,9 @@ export default class UsersScreen extends Component {
               <List>
                 {
                   allUsers.map(user => (
-                    <ListItem avatar button key={user.id} onPress={() => createChannel('cj6jd7fk2kver0124unux3co3', [user.id])}>
+                    <ListItem avatar button key={user.id} onPress={() => {
+                      createChannel('cj6jd7fk2kver0124unux3co3', [user.id]);
+                    }}>
                       <Left>
                         <Thumbnail source={defaultAvatar} />
                       </Left>
