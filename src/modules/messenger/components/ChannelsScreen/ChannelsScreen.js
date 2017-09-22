@@ -17,7 +17,7 @@ import {
   Spinner
 } from 'native-base';
 
-import defaultAvatar from './avatar.jpg';
+import ChannelItem from '../ChannelItem';
 
 export default class ChannelsScreen extends Component {
   render() {
@@ -62,26 +62,7 @@ export default class ChannelsScreen extends Component {
               <List>
                 {
                   channels.map(channel => (
-                    <ListItem avatar button key={channel.id} onPress={() => openChannel(channel.id)}>
-                      <Left>
-                        <Thumbnail source={defaultAvatar} />
-                      </Left>
-
-                      <Body>
-                      <Text>
-                        {
-                          channel.recipients.map(({ name }) => name).join(', ')
-                        }
-                      </Text>
-                      <Text note>
-                        {
-                          channel.messages.length
-                            ? channel.messages[0].text
-                            : ' '
-                        }
-                      </Text>
-                      </Body>
-                    </ListItem>
+                    <ChannelItem key={channel.id} channel={channel} onPress={openChannel} />
                   ))
                 }
               </List>

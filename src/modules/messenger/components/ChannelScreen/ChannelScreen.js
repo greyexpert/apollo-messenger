@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { uniqueId } from 'lodash';
-import { GiftedChat } from 'react-native-gifted-chat';
 import styled from 'styled-components/native';
 import {
   Container,
@@ -16,6 +15,8 @@ import {
   Title,
   View
 } from 'native-base';
+
+import Chat from '../Chat';
 
 const Wrapper = styled(View)`
   flex: 1;
@@ -66,16 +67,10 @@ export default class ChannelScreen extends Component {
   }
 
   renderChat() {
-
-    const { messages } = this.state;
+    const { channel } = this.props;
 
     return (
-      <GiftedChat messages={messages}
-        onSend={(messages) => this.onSend(messages)}
-        user={{
-          _id: 1
-        }}
-      />
+      <Chat channelId={channel.id} />
     )
   }
 
@@ -109,7 +104,7 @@ export default class ChannelScreen extends Component {
         </Header>
         <Wrapper>
           {
-            loading ? (
+            loading || !channel ? (
               <Spinner color='blue' />
             ) : this.renderChat()
           }

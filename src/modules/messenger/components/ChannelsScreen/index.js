@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { gql, graphql, compose } from 'react-apollo';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
+import ChannelItem from '../ChannelItem';
 import ChannelsScreen from './ChannelsScreen';
 import NewChannelScreen from '../NewChannelScreen';
 import ChannelScreen from '../ChannelScreen';
@@ -12,7 +13,7 @@ const CHANNEL_ROUTE = 'messenger/channels/view';
 
 
 const channelsQuery = gql`
-query userChannels($userId: ID!){
+query userChannels($userId: ID!) {
   allChannels(
     orderBy: updatedAt_DESC
     filter: {
@@ -29,21 +30,11 @@ query userChannels($userId: ID!){
         }
       ]
     }
-  ) {
-    id,
-    recipients {
-      name
-    }
-    messages(last: 1) {
-      text,
-      createdAt
-      user {
-        id
-        name
-      }
-    }
+  ) @connection(key: "userChannels") {
+    ...ChannelItem
   }
 }
+${ChannelItem.fragments.channel}
 `;
 
 const mapDispatchToProps = {

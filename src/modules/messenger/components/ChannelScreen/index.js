@@ -4,8 +4,9 @@ import { graphql, gql, compose } from 'react-apollo';
 import ChannelScreen from './ChannelScreen';
 
 const channelQuery = gql`
-query Channel($channelId: ID!){
+query channelItem($channelId: ID!){
   Channel(id: $channelId) {
+    id
     recipients {
       id
       name
@@ -19,8 +20,6 @@ export default compose(
 
   graphql(channelQuery, {
     props: ({ data }) => {
-      console.log('data', data);
-
       return {
         channel: data.Channel,
         loading: data.loading
