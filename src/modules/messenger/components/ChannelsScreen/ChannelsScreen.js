@@ -8,19 +8,32 @@ import {
   Left,
   Icon,
   Right,
-  View,
-  Text,
   Button,
-  Thumbnail,
   List,
-  ListItem,
   Spinner
 } from 'native-base';
 
 import ChannelItem from '../ChannelItem';
 
 export default class ChannelsScreen extends Component {
+  componentWillReceiveProps({ screenProps }) {
+    const { navigation, data } = this.props;
+
+    if (screenProps.currentState.key === navigation.state.key) {
+      data.refetch();
+    }
+  }
+
+  shouldComponentUpdate() {
+    return this.isFocused();
+  }
+
+  isFocused() {
+    return this.props.screenProps.currentState.key === this.props.navigation.state.key;
+  }
+
   render() {
+
     const {
       navigation,
       showChannelCreation,

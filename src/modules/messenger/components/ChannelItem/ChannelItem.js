@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { gql } from 'react-apollo'
 import { propType as fragmentProp } from 'graphql-anywhere';
+import { last } from 'lodash';
 import PropTypes from 'prop-types';
 
 import {
@@ -13,13 +14,16 @@ import {
 
 import defaultAvatar from './avatar.jpg';
 
-class ChannelItem extends Component {
+class ChannelItem extends PureComponent {
   render() {
+    console.log('ChannelItem:render')
+
+
     const {
       channel: {
         id,
         recipients = [],
-        messages,
+        lastMessages: messages,
       },
       onPress
     } = this.props;
@@ -39,7 +43,7 @@ class ChannelItem extends Component {
         <Text note>
           {
             messages.length
-              ? messages[0].text
+              ? last(messages).text
               : ' '
           }
         </Text>
@@ -54,9 +58,12 @@ ChannelItem.fragments = {
       fragment ChannelItem on Channel {
         id
         recipients {
-          name  
+          id
+          name
         }
-        messages(last: 1) {
+        
+        lastMessages: messages(last: 1) {
+          id
           text
         }
       }

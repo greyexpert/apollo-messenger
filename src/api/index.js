@@ -6,6 +6,8 @@ const networkInterface = createBatchingNetworkInterface({ uri: 'https://api.grap
 const client = new ApolloClient({
   networkInterface,
   reduxRootSelector: state => state[REDUCER_NAME],
+  connectToDevTools: true,
+  dataIdFromObject: ({ id }) => id
 });
 
 export default client;

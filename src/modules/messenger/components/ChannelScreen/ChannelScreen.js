@@ -3,8 +3,6 @@ import { uniqueId } from 'lodash';
 import styled from 'styled-components/native';
 import {
   Container,
-  Content,
-  Text,
   Spinner,
   Header,
   Button,
@@ -27,47 +25,10 @@ export default class ChannelScreen extends Component {
     header: null,
   };
 
-  state = {
-    messages: []
-  };
-
-  onSend(messages = []) {
-
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      };
-    });
-
-    // for demo purpose
-    this.answerDemo(messages);
-  }
-
-  answerDemo(messages) {
-    if (messages.length) {
-      this.onReceive(messages[0].text);
-    }
-  }
-
-  onReceive(text) {
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, {
-          _id: Math.round(Math.random() * 1000000),
-          text: text,
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'Roma',
-            // avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        }),
-      };
-    });
-  }
-
   renderChat() {
-    const { channel } = this.props;
+    const {
+      channel
+    } = this.props;
 
     return (
       <Chat channelId={channel.id} />

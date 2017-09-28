@@ -15,15 +15,37 @@ export const reducer = (state = initialState, action) => {
   return nextState || state;
 };
 
+const getCurrentScreenState = (state) => {
+  if (!state) {
+    return null;
+  }
+
+  const route = state.routes[state.index];
+
+  if (route.routes) {
+    return getCurrentScreenState(route);
+  }
+
+  return route;
+};
+
 class AppNavigator extends Component {
   render() {
     const { dispatch, navigation: state } = this.props;
 
+    const currentState = getCurrentScreenState(state);
+
     return (
-      <Navigator navigation={addNavigationHelpers({
-        dispatch,
-        state,
-      })} />
+      <Navigator
+        screenProps={{
+          currentState,
+        }}
+
+        navigation={addNavigationHelpers({
+          dispatch,
+          state,
+        })}
+      />
     );
   }
 }

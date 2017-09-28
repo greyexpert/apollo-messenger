@@ -11,30 +11,30 @@ const NEW_CHANNEL_ROUTE = 'messenger/channels/new';
 const CHANNELS_ROUTE = 'messenger/channels/index';
 const CHANNEL_ROUTE = 'messenger/channels/view';
 
-
 const channelsQuery = gql`
-query userChannels($userId: ID!) {
-  allChannels(
-    orderBy: updatedAt_DESC
-    filter: {
-      OR: [
-      	{
-          owner: {
-      			id: $userId
-      		}
-        },
-        {
-          recipients_some: {
-            id: $userId
+  query userChannels($userId: ID!) {
+    allChannels(
+      orderBy: updatedAt_DESC
+      filter: {
+        OR: [
+          {
+            owner: {
+              id: $userId
+            }
+          },
+          {
+            recipients_some: {
+              id: $userId
+            }
           }
-        }
-      ]
+        ]
+      }
+    ) {
+      ...ChannelItem
     }
-  ) @connection(key: "userChannels") {
-    ...ChannelItem
   }
-}
-${ChannelItem.fragments.channel}
+  
+  ${ChannelItem.fragments.channel}
 `;
 
 const mapDispatchToProps = {
@@ -52,10 +52,16 @@ const mapDispatchToProps = {
 const ConnectedChannelsScreen = compose(
   connect(null, mapDispatchToProps),
   graphql(channelsQuery, {
-    options: {
-      variables: {
-        userId: 'cj6jd7fk2kver0124unux3co3'
-      }
+    options: () => {
+
+
+      return {
+        variables: {
+          userId: 'cj6jd7fk2kver0124unux3co3'
+        },
+
+        // pollInterval: 5000
+      };
     }
   })
 )(ChannelsScreen);

@@ -2,70 +2,57 @@ import { connect } from 'react-redux';
 import { graphql, gql, compose } from 'react-apollo';
 
 import Chat from './Chat';
-import ChannelItem from '../ChannelItem';
-
-const messageFragment = gql`  
-fragment ChatMessage on Message {
-  id
-  text
-  user {
-    id
-    name
-  }
-}
-`;
 
 const messagesQuery = gql`
-${messageFragment}
-
-query channelMessages($channelId: ID!) {
-  allMessages(
-    filter: {
-      channel: {
-        id: $channelId
+  query currentChannel($channelId: ID!) {
+    messages: allMessages(
+      filter: {
+        channel: {
+          id: $channelId
+        }
       }
+      orderBy: createdAt_DESC
+    ) {
+      ...Chat_message
     }
-    orderBy: updatedAt_DESC
-  ) {
-    ...ChatMessage
   }
-}
+
+  ${Chat.fragments.message}
 `;
 
 const userQuery = gql`
-query User($userId: ID!){
-  User(id: $userId) {
-    id
-    name
+  query User($userId: ID!) {
+    User(id: $userId) {
+      ...Chat_user
+    }
   }
-}
+  
+  ${Chat.fragments.user}
 `;
 
 const newMessageMutation = gql`
-${messageFragment}
-
-mutation createMessage($userId: ID!, $channelId: ID!, $text: String!) {
-  createMessage(
-    userId: $userId
-    channelId: $channelId
-    text: $text
-  ) {
-    ...ChatMessage
+  mutation createMessage($userId: ID!, $channelId: ID!, $text: String!) {
+    createMessage(
+      userId: $userId
+      channelId: $channelId
+      text: $text
+    ) {
+      id
+      ...Chat_message
+    }
   }
-}
+
+  ${Chat.fragments.message}
 `;
 
 export default compose(
   connect(),
 
   graphql(messagesQuery, {
-    props: ({ data }) => {
-
-      return {
-        messages: data.allMessages || [],
-        loading: data.loading
-      };
-    },
+    props: ({ data }) => ({
+      messages: data.messages,
+      loading: data.loading
+    }),
 
     options: ({ channelId }) => ({
       variables: {
@@ -77,14 +64,11 @@ export default compose(
   }),
 
   graphql(userQuery, {
-    props: ({ data }) => {
-
-      return {
-        user: data.User || {
-          id: 'cj6jd7fk2kver0124unux3co3'
-        }
-      };
-    },
+    props: ({ data }) => ({
+      user: data.User || {
+        id: 'cj6jd7fk2kver0124unux3co3'
+      }
+    }),
 
     options: () => ({
       variables: {
@@ -94,36 +78,53 @@ export default compose(
   }),
 
   graphql(newMessageMutation, {
-    props: ({ mutate, ownProps: { channelId } }) => {
+    props: ({ mutate, ownProps: { channelId, onSend } }) => {
       return {
-        onSend(messages) {
-          return Promise.all(messages.map(async ({ user, text }) => {
-            const {
-              data: {
-                createMessage: message
-              }
-            } = await mutate({
-              variables: {
-                channelId,
-                userId: user.id,
-                text
-              },
 
-              update(store, { data: { createMessage: message } }) {
-                const variables = {
+        onSend: messages => Promise.all(messages.map(async ({ user, text, _id: id }) => {
+          const optimisticMessage = {
+            __typename: 'Message',
+            id,
+            text,
+            user
+          };
+
+          const {
+            data: {
+              createMessage: message
+            }
+          } = await mutate({
+            variables: {
+              channelId,
+              userId: user.id,
+              text
+            },
+
+            optimisticResponse: {
+              __typename: 'Mutation',
+              createMessage: optimisticMessage,
+            },
+
+            update(store, { data: { createMessage: message } }) {
+              const query = {
+                variables: {
                   channelId
-                };
+                },
+                query: messagesQuery
+              };
 
-                const data = store.readQuery({ query: messagesQuery, variables });
+              const data = store.readQuery(query);
+              data.messages.unshift(message);
 
-                data.allMessages.unshift(message);
-                store.writeQuery({ query: messagesQuery, data, variables });
-              }
-            });
+              store.writeQuery({
+                ...query,
+                data
+              });
+            }
+          });
 
-            return message;
-          }));
-        }
+          return message;
+        }))
       }
     }
   })
