@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
-  "dependencies": {git
+  "dependencies": {
     "apollo-client": "^1.9.2",
     "babel-preset-react-native": "4.0.0",
     "graphql-anywhere": "^3.1.0",
